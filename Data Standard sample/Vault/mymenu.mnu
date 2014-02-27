@@ -1,0 +1,165 @@
+﻿/*
+	Description: Description text for the menucommand. Must be quoted
+	Id: Unique Id for the command. Must be quoted
+	Hint: Hint string, must be quoted
+	Label: Label string for the command, must be quoted
+	MultiSelectEnabled: If true, command is active for multiple selections, can be true or false
+	ToolbarPaintStyle: Controls how the item is drawn on toolbars, values are Text, Glyph, TextAndGlyph
+	NavigationType: Comma separated list of entities for which this command should be active. Values are 
+		Bom, ChangeOrder, File, FileVersion, Folder, Item, Other
+	PSFile: Name of the *ps1 file that contains the powershell script to execute when the menu command is invoked, value must be quoted.
+	Image: Name of a bitmap file that contains the image for the menu command. Image should be 16x16 or 32x32, value must be quoted.
+*/
+
+
+item cOpartList
+{
+	Description = "Parts only Report";
+	Id = "cOprintPartReport";
+	Hint = "Parts only report...";
+	Label = "Parts only report...";
+	MultiSelectEnabled = false;
+	NavigationTypes = [File];
+	ToolbarPaintStyle = TextAndGlyph;
+	PSFile = "cOpartList.ps1";
+	Image="co.ico";
+}
+
+
+item newFile 
+{
+	Description = "New Standard file";
+	Id = "DSNewStandardFile";
+	Hint = "Create a new file";
+	Label = "New Standard File...";
+	MultiSelectEnabled = false;
+	NavigationTypes = [Folder, File];
+	ToolbarPaintStyle = TextAndGlyph;
+	PSFile = "CreateFile.ps1";
+	Image="NewStandardFile.ico";
+}
+
+
+
+item editFile 
+{
+	Description = "Edit file";
+	Id = "DSEditFileDatasheet";
+	Hint = "Edit a file data";
+	Label = "Edit File Datasheet...";
+	MultiSelectEnabled = false;
+	NavigationTypes = [File];
+	ToolbarPaintStyle = TextAndGlyph;
+	PSFile = "EditFile.ps1";
+	Image="EditFileDatasheet.ico";
+}
+
+item newFolder 
+{
+	Description = "New Folder";
+	Id = "DSNewStandardFolder";
+	Hint = "Create a new folder";
+	Label = "New Standard Folder...";
+	MultiSelectEnabled = false;
+	NavigationTypes = [Folder];
+	ToolbarPaintStyle = TextAndGlyph;
+	PSFile = "CreateFolder.ps1";
+	Image="NewStandardFolder.ico";
+}
+
+item editFolder 
+{
+	Description = "Edit Folder";
+	Id = "DSEditFolderDatasheet";
+	Hint = "Edit folder data";
+	Label = "Edit Folder Datasheet...";
+	MultiSelectEnabled = false;
+	NavigationTypes = [Folder];
+	ToolbarPaintStyle = TextAndGlyph;
+	PSFile = "EditFolder.ps1";
+	Image="EditFolderDatasheet.ico";
+}
+
+item showLog
+{
+	Description = "Show Log";
+	Id = "DSShowLog";
+	Hint = "Show Data Standard Log Window";
+	Label = "Show Data Standard Log Window";
+	MultiSelectEnabled = false;
+	ToolbarPaintStyle = TextAndGlyph;
+	PSFile = "ShowLog.ps1";
+	Image="Log.ico";
+}
+
+item showAboutDialog
+{
+	Description = "Show About Dialog";
+	Id = "DSShowAbout";
+	Hint = "About Autodesk Vault Data Standard";
+	Label = "About Autodesk Vault Data Standard";
+	MultiSelectEnabled = false;
+	ToolbarPaintStyle = TextAndGlyph;
+	PSFile = "ShowAboutDialog.ps1";
+	Image="About.ico";
+}
+
+/*
+	Id: Unique Id string, quoted
+	Label:  String displayed as the label, e.g. for submenus, quoted
+	DeployAsPulldown: If true, used as submenu, values are true or false
+	Location: Specifies the location of the command site within the Vault CLient UI, values are 
+		StandardToolbar, AdvancedToolbar, BehaviorsToolbar, ItemBomToolbar, 
+		FileMenu, EditMenu, ActionsMenu, ToolsMenu, HelpMenu, FileContextMenu, FolderContextMenu, ChangeOrderContextMenu, ItemContextMenu
+	MenuItems: comma separated list with MenuItems. You must prepend the MenuItem name with a $. 
+*/
+
+
+
+
+site fileContext 
+{
+	Id="DSSiteFileContext";
+	Label="myMenu";
+	DeployAsPulldown=false;
+	Location=FileContextMenu;
+	MenuItems=[$newFile, $editFile,$cOpartList];
+}
+
+site folderContext 
+{
+	Id="DSSiteFolderContext";
+	Label="myMenu";
+	DeployAsPulldown=false;
+	Location=FolderContextMenu;
+	MenuItems=[$newFile, $newFolder, $editFolder];
+}
+/*
+site standardToolbar 
+{
+	Id="DSSiteStandardToolbar";
+	Label="myMenu";
+	DeployAsPulldown=false;
+	Location=StandardToolbar;
+	MenuItems=[$newFile, $editFile];
+}
+*/
+
+site toolsMenu 
+{
+	Id="DSSiteToolsMenu";
+	Label="myMenu";
+	DeployAsPulldown=false;
+	Location=ToolsMenu;
+	MenuItems=[$showLog];
+}
+
+site helpMenu 
+{
+	Id="DSSiteHelpMenu";
+	Label="myMenu";
+	DeployAsPulldown=false;
+	Location=HelpMenu;
+	MenuItems=[$showAboutDialog];
+}
+
